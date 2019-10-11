@@ -1,4 +1,4 @@
-const albuma = []
+const album = []
 
 const form = document.querySelector('#album-form'); //could also getElementById
 const userName = document.querySelector('#name');
@@ -14,32 +14,40 @@ const userYearReleased = document.querySelector('#year');
 
 //eventListeners(); */
 
-
+function eventListeners(){
+  form.addEventListener('submit', displayAlbum);
+  display.addEventListener('click', removeAlbum);
+  /* form.addEventListener('submit', function(){
+     console.log('test');
+ });  */
+}
+eventListeners();
 
 function displayAlbum(e) {
-    let html = '<div class="display-avenger"><div class="display-alias">%alias%</div><div class="display-powers">%powers%</div><div class="display-name">%name%</div><div class="first-appearance">%years%</div><div class="display-image"><img src="%url%" alt=""></div><div class="remove-avenger"><p class="remove-avenger">Remove Avenger &#10006; </p></div></div>';
+    let html = '<div class="display-fullAlbum"><div class="display-album">%album%</div><div class="display-artist">%artist%</div><div class="display-year">%year%</div><div class="remove-album"><p class="remove album">Remove Album &#10006;</p></div></div>';
 
-    let newHtml = html.replace('%alias%', userAlias.value);
-    newHtml = newHtml.replace('%powers%', userPowers.value);
-    newHtml = newHtml.replace('%name%', userFullName.value);
-    newHtml = newHtml.replace('%years%', userFirstAppearance.value);
-    newHtml = newHtml.replace('%url%', userImage.value);
-    display.insertAdjacentHTML('beforeend', newHtml);
+    let newHtml = html.replace('%album%', userAlbum.value);
+    newHtml = newHtml.replace('%artist%', userArtist.value);
+    newHtml = newHtml.replace('%year', userYearReleased.value);
+
     //console.log('is the vent firing?');
     e.preventDefault();
-    if(userAlias.value === "") {
-      alert('Alias Missing')
-    } else if (userPowers.value === "") {
-      alert('Powers Missing')
-    } else if (userFullName.value === "") {
-      alert('No Name')
-    } else if (userFirstAppearance.value === "") {
-      alert('No First Appearence')
-    } else if (userImage.value === "") {
-      alert('No Image')
+    if(userAlbum.value === "") {
+      alert('Album Missing')
+    } else if (userArtist.value === "") {
+      alert('Artist Missing')
+    } else if (userYearReleased.value === "") {
+      alert('No Year Released')
     }
-    
 }
+
+function init() {
+  userAlbum.value = '';
+  userArtist.value = '';
+  userYearReleased.value = '';
+}
+
+init();
 
 
 
@@ -50,4 +58,11 @@ class Album {
         this.artist = artisit;
         this.yearReleased = yearReleased
     }
+}
+
+function removeAlbum(e) {
+  if(e.target.parentElement.classList.contains('remove-fullAlbum')){
+      e.target.parentElement.parentElement.remove();
+      //console.log(e.target.parentElement);
+  }
 }
