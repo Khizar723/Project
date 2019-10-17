@@ -49,8 +49,15 @@ class UI {
     let newHtml = html.replace('%album%', userAlbum.value);
     newHtml = newHtml.replace('%artist%', userArtist.value);
     newHtml = newHtml.replace('%year', userYearReleased.value);
+    document.querySelector(".display").insertAdjacentElement('beforeend', newHtml);
 };
-}
+
+function removeAlbum(e) {
+    if(e.target.parentElement.classList.contains('remove-fullAlbum')){
+        e.target.parentElement.parentElement.remove();
+        //console.log(e.target.parentElement);
+    }
+  }
 
 function init() {
     userAlbum.value = '';
@@ -58,13 +65,11 @@ function init() {
     userYearReleased.value = '';
   }
   
-  init();
-function removeAlbum(e) {
-    if(e.target.parentElement.classList.contains('remove-fullAlbum')){
-        e.target.parentElement.parentElement.remove();
-        //console.log(e.target.parentElement);
-    }
-  }
+
+
+}
+
+init()
 
  
 
@@ -75,6 +80,10 @@ function eventListeners() {
     form.addEventListener('submit', clearForm);
     display.addEventListener('click', removeScientist);
 }
+
+const title = document.getElementById('album').value
+
+console.log(title)
 eventListeners();  
 
 
@@ -95,35 +104,13 @@ eventListeners();
 */
 
 function displayScientist(e) {
-    let html = `<div class="display-scientist">
-        <div class="display-full-name">
-            Albert Einstein
-        </div>
-        <div class="display-field">
-            Theoretical Physics
-        </div>
-        <div class="display-age">
-            140
-        </div>
-        <div class="display-birth-country">
-            Austria
-        </div>
-        <div class="display-nobel>
-            True
-        </div>
-        <div class="display-image">
-            <img src="https://cdn.mos.cms.futurecdn.net/c7dppKDbG3JXuMfybV5tUX.jpg">
-        </div>
-        <div class="remove-scientist">
-            <p class="remove-scientist">Remove Scientist &#10006;</p>
-        </div>
-    </div>`;
+    let html = '<div class="display-fullAlbum"><div class="display-album">%album%</div><div class="display-artist">%artist%</div><div class="display-year">%year%</div><div class="remove-album"><p class="remove album">Remove Album &#10006;</p></div></div>';
 
-    let newHtml = html.replace('%full-name%', formName.value);
-    newHtml = newHtml.replace('%field%', formField.value);
-    newHtml = newHtml.replace('%age-today%', formAge.value);
-    newHtml = newHtml.replace('%birth-country%', formBirthCountry.value);
-    newHtml = newHtml.replace('%nobel%', formNobelWinner.value);
+    let newHtml = html.replace('%album%', userAlbum.value);
+    newHtml = newHtml.replace('%artist%', userArtist.value);
+    newHtml = newHtml.replace('%year', userYearReleased.value);
+
+    
     console.log('is the event firing?');
     newHtml = newHtml.replace('%url%', formImage.value);
     display.insertAdjacentHTML('beforeend', newHtml);
