@@ -26,9 +26,9 @@ eventListeners();
 function displayAlbum(e) {
     let html = '<div class="display-fullAlbum"><div class="display-album">%album%</div><div class="display-artist">%artist%</div><div class="display-year">%year%</div><div class="remove-album"><p class="remove album">Remove Album &#10006;</p></div></div>';
 
-    let newHtml = html.replace('%album%', userAlbum.value);
-    newHtml = newHtml.replace('%artist%', userArtist.value);
-    newHtml = newHtml.replace('%year', userYearReleased.value);
+    let newHtml = html.replace('%album%', Album.name);
+    newHtml = newHtml.replace('%artist%', Album.maker);
+    newHtml = newHtml.replace('%year', Album.yearReleased);
 
     //console.log('is the vent firing?');
     e.preventDefault();
